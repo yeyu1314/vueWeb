@@ -10,7 +10,7 @@ import router from './index'
 // 确保要调用 next 方法，否则钩子就不会被 resolved。
 router.beforeEach((to, from, next) => {
   if (to.meta.title) {
-    document.title = to.meta.title ? to.meta.title : '微微夜雨博客管理系统';
+    document.title = to.meta.title ? to.meta.title : '微微夜雨博客管理系统'
   }
   // 判断是否需要登录权限
   if (to.matched.some(res => res.meta.auth)) {

@@ -45,7 +45,7 @@ export default {
     searchCom,
     editCom
   },
-  data() {
+  data () {
     let checkTypes = [{label: '全部', value: '0'}, {label: '检测', value: '1'}, {
       label: '治疗',
       value: '2'
@@ -133,7 +133,7 @@ export default {
       title: '编辑',
       editRules: {
         name: [
-          { required: true, message: '请输入姓名', trigger: 'blur' },
+          { required: true, message: '请输入姓名', trigger: 'blur' }
         ]
       }
     }

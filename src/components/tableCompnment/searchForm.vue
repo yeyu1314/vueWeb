@@ -72,15 +72,15 @@ export default {
     },
     searchForm: {
       type: Array,
-      default: []
+      default: () => []
     },
     searchHandle: {
       type: Array,
       default: () => []
     },
     searchData: {
-      type: Object,
-      default: {}
+      type: Object
+      // default: {}
     }
   },
   data () {

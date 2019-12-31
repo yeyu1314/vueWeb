@@ -6,17 +6,17 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
     }
   },
   methods: {
-    handleChangeCollapse() {
-      this.$store.commit('changeCollapse');
+    handleChangeCollapse () {
+      this.$store.commit('changeCollapse')
     }
   },
-  created() {
-  },
+  created () {
+  }
 }
 </script>
 <style lang="less" scoped>

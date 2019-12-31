@@ -188,7 +188,6 @@
   </section>
 </template>
 
-
 <script>
 export default {
   name: 'tableForm',
@@ -228,7 +227,7 @@ export default {
     return {}
   },
   watch: {
-    'defaultSelections'(val) {
+    'defaultSelections' (val) {
       this.$nextTick(function () {
         if (Array.isArray(val)) {
           val.forEach(row => {
@@ -242,21 +241,21 @@ export default {
   },
   methods: {
     // 表格勾选
-    select(rows, row) {
-      this.$emit('select', rows, row);
+    select (rows, row) {
+      this.$emit('select', rows, row)
     },
     // 全选
-    selectAll(rows) {
+    selectAll (rows) {
       this.$emit('select', rows)
     },
     //
-    handleCurrentChange(val) {
-      this.tablePage.pageNum = val;
-      this.$emit('CurrentChange', val);
+    handleCurrentChange (val) {
+      this.tablePage.pageNum = val
+      this.$emit('CurrentChange', val)
     },
-    handleSizeChange(val) {
-      this.tablePage.pageSize = val;
-      this.$emit('SizeChange', val);
+    handleSizeChange (val) {
+      this.tablePage.pageSize = val
+      this.$emit('SizeChange', val)
     },
 
     // tableRowClassName({rowIndex}) {
@@ -265,10 +264,10 @@ export default {
     //     }
     //     return "";
     // }
-    renderHeader(h, obj) {
+    renderHeader (h, obj) {
       return h('span', {class: 'ces-table-require'}, obj.column.label)
-    },
-  },
+    }
+  }
 }
 </script>
 

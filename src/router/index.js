@@ -3,16 +3,16 @@ import Router from 'vue-router'
 // import HelloWorld from '@/components/HelloWorld'
 Vue.use(Router)
 
-const _import = file => () => import('@/pages/' + file + '.vue');
-const _import_ = file => () => import('@/components/' + file + '.vue');
+const _import = file => () => import('@/pages/' + file + '.vue')
+const _import_ = file => () => import('@/components/' + file + '.vue')
 
-const asyncRouterMap = [];
+// const asyncRouterMap = []
 
 const constantRouterMap = [
   {
     path: '/login',
     name: 'login',
-    component: _import('login/index'),
+    component: _import('login/index')
   },
   {
     path: '/',
@@ -34,7 +34,7 @@ const constantRouterMap = [
   },
   {
     path: 'menu',
-    name: "菜单",
+    name: '菜单',
     component: _import_('commons/Layout'),
     redirect: '/menu_list',
     children: [
@@ -47,7 +47,7 @@ const constantRouterMap = [
           isAlive: true,
           title: '菜单列表'
         }
-      },
+      }
     ]
   },
   {
@@ -74,7 +74,7 @@ const constantRouterMap = [
           auth: false,
           isAlive: true,
           title: '文章详情'
-        },
+        }
       }
     ]
   },
@@ -83,24 +83,24 @@ const constantRouterMap = [
     name: '404',
     component: _import('error/index'),
     meta: {
-      title: "请求页面未找到",
+      title: '请求页面未找到'
       // auth: false
-    },
+    }
   },
   {
     path: '*',
     meta: {
-      title: "请求页面未找到",
+      title: '请求页面未找到'
       // auth: false
     },
     redirect: '/404'
   }
-];
+]
 
 const router = new Router({
   mode: 'history',
   routes: constantRouterMap,
-  linkActiveClass: "router-link-active",
-});
+  linkActiveClass: 'router-link-active'
+})
 
 export default router

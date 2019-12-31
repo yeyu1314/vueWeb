@@ -97,7 +97,7 @@ export default {
         this.$nextTick(() => {
           _this.active = ''
           _this.openeds = ['']
-          _this.$refs.menuchild.close(_this.active);
+          _this.$refs.menuchild.close(_this.active)
         })
       }
     }

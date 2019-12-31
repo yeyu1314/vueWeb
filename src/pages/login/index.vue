@@ -5,7 +5,7 @@
 export default {
   data () {
     return {
-      data:'登录'
+      data: '登录'
     }
   }
 }

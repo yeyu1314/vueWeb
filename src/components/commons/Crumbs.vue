@@ -12,26 +12,25 @@
 </template>
 <script>
 export default {
-  data() {
+  data () {
     return {
       crumbsList: []
     }
   },
   watch: {
-    $route() {
-      this.getCrumbs();
+    $route () {
+      this.getCrumbs()
     }
   },
   methods: {
-    getCrumbs() {
-      this.crumbsList = this.$route.matched;
+    getCrumbs () {
+      this.crumbsList = this.$route.matched
     }
   },
-  created() {
-    this.getCrumbs();
+  created () {
+    this.getCrumbs()
   }
 }
 </script>
 <style lang="less" scoped>
- 
 </style>

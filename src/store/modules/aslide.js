@@ -38,7 +38,7 @@ export default {
             'path': '/article_list'
           },
           {
-            'text': '详情',
+            'text': '文章详情',
             'path': '/article_detail'
           }
         ]

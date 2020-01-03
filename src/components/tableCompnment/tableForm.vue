@@ -292,4 +292,7 @@ export default {
   .el-button {
     margin: 0 10px 10px 0 !important;
   }
+  .el-table td, .el-table th {
+    text-align: center !important;
+  }
 </style>

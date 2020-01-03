@@ -40,7 +40,7 @@ const constantRouterMap = [
     children: [
       {
         path: '/menu_list',
-        name: '列表',
+        name: '菜单列表',
         component: _import('menu/index'),
         meta: {
           auth: false,
@@ -58,7 +58,7 @@ const constantRouterMap = [
     children: [
       {
         path: '/article_list',
-        name: '列表',
+        name: '文章列表',
         component: _import('article/lists'),
         meta: {
           auth: false,
@@ -68,7 +68,7 @@ const constantRouterMap = [
       },
       {
         path: '/article_detail',
-        name: '详情',
+        name: '文章详情',
         component: _import('article/detail'),
         meta: {
           auth: false,

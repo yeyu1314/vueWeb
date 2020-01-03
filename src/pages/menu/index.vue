@@ -38,6 +38,7 @@
 import tableCom from '../../components/tableCompnment/tableForm'
 import searchCom from '../../components/tableCompnment/searchForm'
 import editCom from '../../components/tableCompnment/editForm'
+import {mapActions} from 'vuex'
 
 export default {
   components: {
@@ -138,6 +139,9 @@ export default {
       }
     }
   },
+  created () {
+    this.getDataList()
+  },
   methods: {
     showRecord (row, that) {
       console.log(row)
@@ -146,8 +150,10 @@ export default {
     },
     closeTip () {
       this.showEdit = false
-    }
+    },
+    ...mapActions(['getDataList'])
   }
+
 }
 </script>
 

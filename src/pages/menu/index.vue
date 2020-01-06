@@ -19,6 +19,8 @@
       :isPagination='true'
       :tablePage='pagination'
       :longDatas="longDatas"
+      @CurrentChange = 'CurrentChange'
+      @SizeChange = 'SizeChange'
     >
     </table-com>
     <edit-com
@@ -58,8 +60,11 @@ export default {
       searchData: {
         carNumber: null
       },
-      searchForm: [// 搜索栏
-        {type: 'Input', prop: 'carNumber', width: '180px', placeholder: '请输入车牌'}
+      searchForm: [ // 搜索栏
+        {type: 'Input', prop: 'carNumber', width: '180px', placeholder: '请输入车牌'},
+        {type: 'Input', prop: 'carMsg', width: '180px', placeholder: '请输入车系'},
+        {type: 'Input', prop: 'station', width: '180px', placeholder: '请输入维修站'},
+        {type: 'Select', prop: 'checkType', width: '180px', options: checkTypes, props: checkTypeProps, change: row => this.selectCheckType(row), placeholder: '请选择业务类型'}
       ],
       searchHandle: [ // 搜索按钮
         {label: '查询', icon: 'el-icon-search', type: 'primary', handle: () => this.searchNews()}
@@ -145,10 +150,18 @@ export default {
     closeTip () {
       this.showEdit = false
     },
+    CurrentChange (val) { // 翻页
+      this.$store.state.pageNo = val
+      this.getDataList()
+    },
+    SizeChange (val) { // 每页显示数量
+      this.$store.state.pageSize = val
+      this.getDataList()
+    },
     ...mapActions(['getDataList'])
   },
   computed: {
-    ...mapState(['tableData', 'pagination', 'longDatas'])// 读数据
+    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize'])// 读数据
   }
 
 }

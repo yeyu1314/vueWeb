@@ -11,7 +11,7 @@
             <el-option v-for="op in item.options" :label="op.label" :value="op.value" :key="op.value"></el-option>
         </el-select>-->
         <el-select v-if="item.type==='Select'" v-model="searchData[item.prop]" size="mini"
-                   :placeholder="item.placeholder" clearable>
+                   :placeholder="item.placeholder" clearable class="input40">
           <el-option v-for="op in item.options" :label="op.label" :value="op.value" :key="op.value"></el-option>
         </el-select>
         <!-- 单选 -->

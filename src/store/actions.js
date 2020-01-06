@@ -3,9 +3,9 @@ import {RECEIVE_TABLEDATA} from './mutation_types'
 
 export default {
   async getDataList ({commit, state}) {
-    console.log('点击啦')
+    console.log('点击啦', state)
     await getlistData(
-      {pageNo: 1, pageSize: 10},
+      {pageNo: state.pageNo, pageSize: state.pageSize},
       {
         type: 9,
         carNumber: '',
@@ -24,7 +24,7 @@ export default {
     }).catch(res => {
       // console.log('promise catch err', res.data)
       if (res.data.retcode === 1) {
-        console.log('promise catch err', res.data.data)
+        // console.log('promise catch err', res.data.data)
         const tableData = res.data.data.rows
         console.log(tableData)
         const pagination = {

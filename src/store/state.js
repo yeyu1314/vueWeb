@@ -8,5 +8,7 @@ export default {
     pageNum: 1,
     total: 0
   },
-  longDatas: []
+  longDatas: [],
+  pageNo: 1,
+  pageSize: 10
 }

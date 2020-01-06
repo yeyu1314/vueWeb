@@ -43,7 +43,7 @@
             <!--数据换行-->
             <div v-if="item.type === 'longData'">
               <div v-for="longDataItem in longDatas" :key="longDataItem.id">
-                <div v-if="longDataItem.id === scope.row.id">
+                <div v-if="longDataItem.jobId === scope.row.jobId">
                   <p v-for="item in longDataItem.note" :key="item.id">{{item}}</p>
                 </div>
               </div>
@@ -276,23 +276,19 @@ export default {
     content: '*';
     color: red;
   }
-
   .el-table__row td {
     text-align: center;
   }
-
   .has-gutter tr th {
     text-align: center;
   }
-
-  .el-table__body-wrapper {
-    height: 100% !important;
-  }
-
   .el-button {
     margin: 0 10px 10px 0 !important;
   }
   .el-table td, .el-table th {
     text-align: center !important;
+  }
+  .el-table__body-wrapper {
+    height: 100% !important;
   }
 </style>

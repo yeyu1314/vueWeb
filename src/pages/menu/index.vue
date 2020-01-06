@@ -9,7 +9,7 @@
     ></search-com>
     <table-com
       :that='that'
-      size='small '
+      size='medium '
       :isSelection='true'
       :isIndex='true'
       :isHandle='true'
@@ -38,7 +38,7 @@
 import tableCom from '../../components/tableCompnment/tableForm'
 import searchCom from '../../components/tableCompnment/searchForm'
 import editCom from '../../components/tableCompnment/editForm'
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
   components: {
@@ -64,10 +64,10 @@ export default {
       searchHandle: [ // 搜索按钮
         {label: '查询', icon: 'el-icon-search', type: 'primary', handle: () => this.searchNews()}
       ],
-      tableData: [
-        {id: 1, carNumber: '粤B555'},
-        {id: 2, carNumber: '粤B555'},
-        {id: 3, carNumber: '粤B555'}], //  表格数据
+      // tableData: [
+      //   {id: 1, carNumber: '粤B555'},
+      //   {id: 2, carNumber: '粤B555'},
+      //   {id: 3, carNumber: '粤B555'}], //  表格数据
       tableCols: [// 表头
         {label: '车牌', prop: 'carNumber'},
         {label: '车辆信息', type: 'longData'},
@@ -76,7 +76,7 @@ export default {
         {label: '故障描述', prop: 'note'},
         {label: '发动机缸数量', prop: 'carCylinder'},
         {label: '当前操作人', prop: 'operatorName'},
-        {label: '操作', type: 'button'},
+        // {label: '操作', type: 'button'},
         {
           label: '冻结',
           type: 'Button',
@@ -109,12 +109,6 @@ export default {
         }
       ],
 
-      longDatas: [],
-      pagination: {// 页数...
-        pageSize: 10,
-        pageNum: 1,
-        total: 0
-      },
       orderPageShowOrgName: false,
       editCfg: [// 编辑form表单
         {label: '车牌', prop: 'carNumber', type: 'input', width: '280px'},
@@ -152,6 +146,9 @@ export default {
       this.showEdit = false
     },
     ...mapActions(['getDataList'])
+  },
+  computed: {
+    ...mapState(['tableData', 'pagination', 'longDatas'])// 读数据
   }
 
 }

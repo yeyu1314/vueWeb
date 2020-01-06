@@ -1,4 +1,5 @@
 import {getlistData} from '../api'
+import {RECEIVE_TABLEDATA} from './mutation_types'
 
 export default {
   async getDataList ({commit, state}) {
@@ -20,13 +21,31 @@ export default {
       //   net.message(this, "获取数据失败", "warning")
       // }
       console.log(res)
-    })
-      .catch(res => {
-        console.log('promise catch err', res.data)
-        if (res.data.retcode === 1) {
-          console.log('promise catch err', res.data)
+    }).catch(res => {
+      // console.log('promise catch err', res.data)
+      if (res.data.retcode === 1) {
+        console.log('promise catch err', res.data.data)
+        const tableData = res.data.data.rows
+        console.log(tableData)
+        const pagination = {
+          pageSize: res.data.data.pageSize,
+          pageNum: res.data.data.pageNo,
+          total: res.data.data.total
         }
-      })
+        let longDatas = []
+        for (let i = 0; i < tableData.length; i++) {
+          longDatas.push({
+            jobId: tableData[i].jobId,
+            note: [
+              tableData[i].factoryName,
+              tableData[i].seriesName,
+              tableData[i].modelName
+            ]
+          })
+        }
+        commit(RECEIVE_TABLEDATA, {tableData, pagination, longDatas})// 提交一个mutation
+      }
+    })
     // console.log(result)
   }
 }

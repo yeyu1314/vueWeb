@@ -1,6 +1,6 @@
 /**
  * @description 侧边栏状态库
- * @author chaizhiyang
+ * @author
  */
 export default {
   state: {

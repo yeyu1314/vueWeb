@@ -3,10 +3,11 @@
  */
 import {RECEIVE_TABLEDATA} from './mutation_types'
 export default {
-  [RECEIVE_TABLEDATA] (state, {tableData, pagination, longDatas}) {
-    // console.log(longDatas)
+  [RECEIVE_TABLEDATA] (state, {tableData, pagination, longDatas, checkButtonList}) {
+    // console.log(checkButtonList)
     state.tableData = tableData
     state.pagination = pagination
     state.longDatas = longDatas
+    state.checkButtonList = checkButtonList
   }
 }

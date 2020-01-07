@@ -77,7 +77,7 @@
             <!--@click="btn.handle(scope.row,btn.jobID)"-->
             <template v-if="item.type === 'checkButton'">
               <div v-for="btnItem in checkButtonList" :key="btnItem.id">
-                <template v-if="btnItem.id === scope.row.id">
+                <template v-if="btnItem.id === scope.row.jobId">
                   <el-button v-for="btn in btnItem.btnList" :key="btn.id"
                              :disabled="btn.disabled && btn.disabled(scope.row)"
                              :type="btn.type"

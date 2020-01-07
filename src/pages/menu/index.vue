@@ -16,6 +16,7 @@
       :tableData='tableData'
       :tableCols='tableCols'
       :newBtnList="newBtnList"
+      :checkButtonList="checkButtonList"
       :isPagination='true'
       :tablePage='pagination'
       :longDatas="longDatas"
@@ -57,9 +58,6 @@ export default {
     return {
       that: this,
       // 查询表单
-      searchData: {
-        carNumber: null
-      },
       searchForm: [ // 搜索栏
         {type: 'Input', prop: 'carNumber', width: '180px', placeholder: '请输入车牌'},
         {type: 'Input', prop: 'carMsg', width: '180px', placeholder: '请输入车系'},
@@ -77,9 +75,10 @@ export default {
         {label: '车牌', prop: 'carNumber'},
         {label: '车辆信息', type: 'longData'},
         {label: '下单时间', prop: 'inputTime'},
-        {label: '业务类型', prop: 'checkType'},
+        {label: '业务类型', prop: 'checkTypeLaber'},
         {label: '故障描述', prop: 'note'},
         {label: '发动机缸数量', prop: 'carCylinder'},
+        {label: '检测报告', type: 'checkButton'},
         {label: '当前操作人', prop: 'operatorName'},
         // {label: '操作', type: 'button'},
         {
@@ -158,10 +157,23 @@ export default {
       this.$store.state.pageSize = val
       this.getDataList()
     },
+    searchNews () { // 搜索
+      const carNumber = this.searchData.carNumber
+      const carMsg = this.searchData.carMsg
+      const station = this.searchData.station
+      const checkType = this.searchData.checkType
+      this.$store.state.searchData = {
+        carNumber: carNumber,
+        carMsg: carMsg,
+        station: station,
+        checkType: checkType
+      }
+      this.getDataList()
+    },
     ...mapActions(['getDataList'])
   },
   computed: {
-    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize'])// 读数据
+    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize', 'searchData', 'checkButtonList'])// 读数据
   }
 
 }

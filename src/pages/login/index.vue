@@ -87,7 +87,7 @@ export default {
     }
   },
   mounted () {
-    // this.automaticLogin()
+    this.automaticLogin()
   },
   methods: {
     async getCode () {
@@ -95,11 +95,13 @@ export default {
         net.message(this, '手机号码格式错误', 'error')
         return false
       }
-      const result = getCode({userPhone: this.userPhone}).then(res => {
+      await getCode({userPhone: this.userPhone}).then(res => {
         console.log(res)
         if (res.retcode === 1) {
           console.log(res)
         }
+      }).catch(res => {
+        console.log(res)
       })
       this.$message({
         message: '短信发送成功',
@@ -107,17 +109,6 @@ export default {
       })
       this.count_down()
       this.flag = false
-      console.log(result)
-
-      // net
-      //   .request('admin/log/getSmsCode', 'post', { userPhone: this.userPhone })
-      //   .then(res => {
-      //     if (res.retcode === 1) {
-      //     }
-      //     net.message(this, res.data, 'suucess')
-      //     this.count_down()
-      //     this.flag = false
-      //   })
     },
     count_down () {
       var time = setInterval(() => {
@@ -129,7 +120,7 @@ export default {
         }
       }, 1000)
     },
-    login () {
+    async login () {
       if (this.code === '') {
         net.message(this, '请输入验证码', 'warning')
       }
@@ -137,61 +128,58 @@ export default {
         userPhone: this.userPhone,
         code: this.code
       }
-      // this.loading2 = true
-      const result = logIn(params).then(res => {
-        if (res.retcode === 1) {
-          // net.message(this, '登录成功', 'success')
+      this.loading2 = true
+      await logIn(params).then(res => {
+        console.log(res)
+      }).catch(res => {
+        console.log(res)
+        if (res.data.retcode === 1) {
+          net.message(this, '登录成功', 'success')
           console.log(res.data)
-          // sessionStorage.setItem('signInfo', JSON.stringify(res.data))
-          // net.setCookie('signInfo', JSON.stringify(res.data))
-          // setTimeout(() => {
-          //   this.loading2 = false
-          //   this.$router.push({ name: 'index' })
-          // }, 1000)
+          sessionStorage.setItem('signInfo', JSON.stringify(res.data))
+          net.setCookie('signInfo', JSON.stringify(res.data))
+          setTimeout(() => {
+            this.loading2 = false
+            this.$router.push({ path: '/' })
+          }, 1000)
         } else {
-          // net.message(this, res.retmsg, 'warning')
+          net.message(this, res.data.retmsg, 'warning')
           // this.loading2 = false
         }
       })
-      console.log(result)
-      // net.request('admin/log/webLogin', 'post', params).then(res => {
-      //   if (res.retcode === 1) {
-      //     net.message(this, '登录成功', 'success')
-      //     console.log(res.data)
-      //     sessionStorage.setItem('signInfo', JSON.stringify(res.data))
-      //     net.setCookie('signInfo', JSON.stringify(res.data))
-      //     setTimeout(() => {
-      //       this.loading2 = false
-      //       this.$router.push({ name: 'index' })
-      //     }, 1000)
-      //   } else {
-      //     net.message(this, res.retmsg, 'warning')
-      //     this.loading2 = false
-      //   }
-      // })
     },
     // 自动登录
-    automaticLogin () {
+    async automaticLogin () {
       var signInfo = JSON.parse(net.getCookie('signInfo'))
       // admin/log/webToken"
       if (signInfo) {
         // this.loading2 = true
         this.loading2 = false
-        net
-          .request('admin/log/webToken', 'post', { userPhone: signInfo.phone })
-          .then(res => {
-            if (res.retcode === 1) {
-              net.message(this, '登录成功', 'success')
-              sessionStorage.setItem('signInfo', JSON.stringify(res.data))
-              setTimeout(() => {
-                this.loading2 = false
-                this.$router.push({ name: 'index' })
-              }, 1000)
-            } else {
-              net.message(this, res.retmsg, 'warning')
+        await logIn({ userPhone: signInfo.phone }).then(res => {
+          if (res.retcode === 1) {
+            net.message(this, '登录成功', 'success')
+            sessionStorage.setItem('signInfo', JSON.stringify(res.data))
+            setTimeout(() => {
               this.loading2 = false
-            }
-          })
+              this.$router.push({ name: 'index' })
+            }, 1000)
+          } else {
+            net.message(this, res.retmsg, 'warning')
+            this.loading2 = false
+          }
+        }).catch(res => {
+          if (res.retcode === 1) {
+            net.message(this, '登录成功', 'success')
+            sessionStorage.setItem('signInfo', JSON.stringify(res.data))
+            setTimeout(() => {
+              this.loading2 = false
+              this.$router.push({ name: 'index' })
+            }, 1000)
+          } else {
+            net.message(this, res.retmsg, 'warning')
+            this.loading2 = false
+          }
+        })
       }
     }
   }

@@ -35,7 +35,8 @@ export default {
         record(row.jobId, 1)
         router.push({
           path: '/article_list',
-          query: {
+          name: '文章列表',
+          params: {
             operId: 1,
             row: row,
             pageNo: state.pageNo,

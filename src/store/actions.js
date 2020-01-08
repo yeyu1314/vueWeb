@@ -1,4 +1,4 @@
-import {getlistData, getCheckout} from '../api'
+import {getlistData, getCheckout, getDetectionOrderListData} from '../api'
 import {RECEIVE_TABLEDATA} from './mutation_types'
 import router from '../router/permission'
 import moment from 'moment'
@@ -93,7 +93,33 @@ export default {
     })
     // console.log(result)
   },
-  async showCheck (row, that) {
-    console.log(row, that)
+  async getDetectionOrderList ({commit, state}) {
+    await getDetectionOrderListData({pageNo: state.pageNo, pageSize: state.pageSize}, {type: 3}).then(res => {
+      console.log(res)
+    }).catch(res => {
+      console.log('待编辑报告数据', res)
+      if (res.data.retcode === 1) {
+        const tableData = res.data.data.rows
+        const pagination = { // 分页数据
+          pageSize: res.data.data.pageSize,
+          pageNum: res.data.data.pageNo,
+          total: res.data.data.total
+        }
+        let longDatas = []
+        for (let i = 0; i < tableData.length; i++) {
+          tableData[i].checkTypeLaber = tableData[i].checkType === 1 ? '检测' : (tableData[i].checkType === 3 ? '治疗+检测' : '治疗') // 业务类型
+          tableData[i].inputTime = moment(tableData[i].inputTime).format('YYYY-MM-DD HH:MM')
+          longDatas.push({ // 车辆信息
+            jobId: tableData[i].jobId,
+            note: [
+              tableData[i].factoryName,
+              tableData[i].seriesName,
+              tableData[i].modelName
+            ]
+          })
+        }
+        commit(RECEIVE_TABLEDATA, {tableData, pagination, longDatas})// 提交一个mutation
+      }
+    })
   }
 }

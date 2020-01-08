@@ -42,6 +42,29 @@ export default {
             'path': '/article_detail'
           }
         ]
+      },
+      {
+        'text': '工单管理',
+        'path': 'detectionOrder',
+        'icon': 'el-icon-document',
+        'itemGroup': [
+          {
+            'text': '检测单录入',
+            'path': '/detectionOrderInput'
+          },
+          {
+            'text': '待检测工单',
+            'path': '/detectionOrderList'
+          },
+          {
+            'text': '待上传照片',
+            'path': '/detectionImgUpload'
+          },
+          {
+            'text': '待编辑报告',
+            'path': '/detectionOrderEdit'
+          }
+        ]
       }
     ]
   },

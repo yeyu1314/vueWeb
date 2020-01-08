@@ -79,6 +79,54 @@ const constantRouterMap = [
     ]
   },
   {
+    path: 'detectionOrder',
+    name: '工单管理',
+    component: _import_('commons/Layout'),
+    redirect: '/detectionOrderInput',
+    children: [
+      {
+        path: '/detectionOrderInput',
+        name: '检测单录入',
+        component: _import('detectionOrder/detectionOrderInput'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '检测单录入'
+        }
+      },
+      {
+        path: '/detectionOrderList',
+        name: '待检测工单',
+        component: _import('detectionOrder/detectionOrderList'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '待检测工单'
+        }
+      },
+      {
+        path: '/detectionImgUpload',
+        name: '待上传照片',
+        component: _import('detectionOrder/detectionImgUpload'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '待上传照片'
+        }
+      },
+      {
+        path: '/detectionOrderEdit',
+        name: '待编辑报告',
+        component: _import('detectionOrder/detectionOrderEdit'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '待编辑报告'
+        }
+      }
+    ]
+  },
+  {
     path: '/404',
     name: '404',
     component: _import('error/index'),

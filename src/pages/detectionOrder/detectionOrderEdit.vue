@@ -15,6 +15,7 @@
       :isHandle='true'
       :tableData='tableData'
       :tableCols='tableCols'
+      :newBtnList='detectionOrderBtnArrList'
       :isPagination='true'
       :tablePage='pagination'
       :longDatas="longDatas"
@@ -60,6 +61,7 @@ export default {
         {label: '故障描述', prop: 'note'},
         {label: '发动机缸数量', prop: 'carCylinder'},
         {label: '当前操作人', prop: 'operatorName'},
+        {label: '操12作', type: 'button'},
         {
           label: '操作',
           type: 'Button',
@@ -72,14 +74,14 @@ export default {
           label: '操作记录',
           type: 'Button',
           btnList: [
-            {type: 'success', label: '查看', handle: (that, row) => this.showRecord(that, row)}
+            {type: 'success', isShow: true, label: '查看', handle: (that, row) => this.showRecord(that, row)}
           ]
         },
         {
           label: '冻结',
           type: 'Button',
           btnList: [
-            {type: 'danger', label: '冻结工单', handle: (that, row) => this.frozen(that, row)}
+            {type: 'danger', isShow: true, label: '冻结工单', handle: (that, row) => this.frozen(that, row)}
           ]
         }
       ],
@@ -90,7 +92,7 @@ export default {
     this.getDetectionOrderList()
   },
   computed: {
-    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize', 'searchData', 'redordData', 'redordCols'])// 读数据
+    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize', 'searchData', 'redordData', 'redordCols', 'detectionOrderBtnArrList'])// 读数据
   },
   methods: {
     ...mapActions(['getDetectionOrderList']),

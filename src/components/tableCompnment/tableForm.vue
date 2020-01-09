@@ -50,19 +50,21 @@
             </div>
 
             <!-- 按钮--><!--一个单元格多个按钮         显示 / 隐藏           -->
-            <div v-for="btnItem in newBtnList" :key="btnItem.id">
-              <template v-if="item.type==='button' && btnItem.id === scope.row.id">
-                <el-button v-for="btn in btnItem.btnList" :key="btn.label"
-                           :disabled="btn.disabled && btn.disabled(scope.row)"
-                           :type="btn.type"
-                           :size="size || btn.size"
-                           :icon="btn.icon"
-                           @click="btn.handle(that,scope.row)"
-                           v-show="btn.isShow"
-                >{{btn.label}}
-                </el-button>
-              </template>
-            </div>
+            <template v-if="item.type==='button'">
+              <div v-for="btnItem in newBtnList" :key="btnItem.id">
+                <template v-if="btnItem.jobId === scope.row.jobId">
+                  <el-button v-for="btn in btnItem.btnList" :key="btn.label"
+                             :disabled="btn.disabled && btn.disabled(scope.row)"
+                             :type="btn.type"
+                             :size="size || btn.size"
+                             :icon="btn.icon"
+                             @click="btn.handle(that,scope.row)"
+                             v-show="btn.isShow"
+                  >{{btn.label}}
+                  </el-button>
+                </template>
+              </div>
+            </template>
             <!--一个单元格一个按钮         显示      -->
             <template v-if="item.type === 'Button'">
               <p v-for="btnItem in item.btnList" :key="btnItem.label">
@@ -71,8 +73,7 @@
                   :type="btnItem.type"
                   :size="size || btnItem.size"
                   :icon="btnItem.icon"
-                  v-show="btnItem.isShow"
-                  @click="btnItem.handle(that,scope.row)">{{btnItem.label}}{{scope.row.jobId}}
+                  @click="btnItem.handle(that,scope.row)">{{btnItem.label}}
                 </el-button>
               </p>
             </template>

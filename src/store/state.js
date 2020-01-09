@@ -23,11 +23,15 @@ export default {
     checkType: null
   },
   checkButtonList: [],
+  // 待编辑报告
   redordCols: [ // 操作记录表头
     {label: '操作人', prop: 'userName'},
     {label: '操作内容', prop: 'remarks'},
     {label: '操作时间', prop: 'inputTime'}
   ],
   redordData: [], // 操作记录数据
-  detectionOrderBtnArrList: []
+  detectionOrderBtnArrList: [],
+  // 待上传照片
+  imgUploadTableData: [],
+  detectionImgUploadBtnArrList: []
 }

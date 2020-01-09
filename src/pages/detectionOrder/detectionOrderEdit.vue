@@ -61,15 +61,15 @@ export default {
         {label: '故障描述', prop: 'note'},
         {label: '发动机缸数量', prop: 'carCylinder'},
         {label: '当前操作人', prop: 'operatorName'},
-        {label: '操12作', type: 'button'},
-        {
+        {label: '操作', type: 'button'},
+        /* {
           label: '操作',
           type: 'Button',
           btnList: [
             {type: 'warning', isShow: true, label: '编辑报告', handle: (that, row) => this.showReport(that, row)},
             {type: 'success', isShow: true, label: '编辑', handle: (that, row) => this.editReport(that, row)}
           ]
-        },
+        }, */
         {
           label: '操作记录',
           type: 'Button',

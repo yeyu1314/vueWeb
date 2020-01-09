@@ -12,8 +12,12 @@ export const logIn = (params) => net.request('admin/log/webLogin', 'post', param
 
 export const getCheckout = (params) => net.request('admin/order/OperationMark', 'post', params) // 跳转到检测报告界面
 
-export const getDetectionOrderListData = (param, data) => net.request('admin/order/queryListPage', 'post', param, data) // 获取待检测工单列表
+export const getDetectionOrderListData = (param, data) => net.request('admin/order/queryListPage', 'post', param, data) // 获取 待检测工单 列表
 
 export const getOperatingRecord = ({id}) => net.request('admin/order/queryOrderById', 'post', {id}) // 获取操作记录
 
 export const frozenOrder = (params) => net.request('admin/abnormalOrder/frozenByUser', 'post', params) // 冻结工单
+
+export const editDetectionOrder = (params) => net.request('admin/order/startPractice', 'post', params) // 编辑报告
+
+export const getDetectionImgUploadData = (param, data) => net.request('admin/order/queryListPage', 'post', param, data) // 获取 待上传照片 列表

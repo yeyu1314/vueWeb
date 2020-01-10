@@ -23,4 +23,5 @@ export default {
   // background-color: @bg-blue;
   height: 100%;
 }
+#app::-webkit-scrollbar { width: 0 !important }
 </style>

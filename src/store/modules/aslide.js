@@ -101,17 +101,6 @@ export default {
             'path': '/detectionOrderAbandon'
           }
         ]
-      },
-      {
-        'text': '菜单',
-        'path': 'menu',
-        'icon': 'el-icon-s-operation',
-        'itemGroup': [
-          {
-            'text': '菜单列表',
-            'path': '/menu_list'
-          }
-        ]
       }
     ]
   },

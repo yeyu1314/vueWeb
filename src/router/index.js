@@ -217,24 +217,6 @@ const constantRouterMap = [
     ]
   },
   {
-    path: 'menu',
-    name: '菜单',
-    component: _import_('commons/Layout'),
-    redirect: '/menu_list',
-    children: [
-      {
-        path: '/menu_list',
-        name: '菜单列表',
-        component: _import('menu/index'),
-        meta: {
-          auth: false,
-          isAlive: true,
-          title: '菜单列表'
-        }
-      }
-    ]
-  },
-  {
     path: '/404',
     name: '404',
     component: _import('error/index'),

@@ -51,10 +51,15 @@ export default {
   .el-aside {
     // background-color: #D3DCE6;
     width: auto!important;
+    height: 95%;
     color: #333;
     text-align: left;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     // line-height: 200px;
+  }
+  .el-aside::-webkit-scrollbar {
+    display: none;
   }
 
   .el-main {

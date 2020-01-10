@@ -1,3 +1,4 @@
+<!--检测单录入-->
 <template>
   <div class="searchContent">
     <el-input placeholder="请输入车牌号" v-model="carNumber" clearable></el-input>

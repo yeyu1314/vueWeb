@@ -1,10 +1,11 @@
-import {getlistData, getCheckout, getDetectionOrderListData, editDetectionOrder, getDetectionImgUploadData} from '../api'
-import {RECEIVE_IMG_UPLOAD_TABLEDATA, RECEIVE_TABLEDATA} from './mutation_types'
+import {getlistData, getCheckout, getDetectionOrderEdutListData, editDetectionOrder, getDetectionImgUploadData, getDetectionOrderListData} from '../api'
+import {RECEIVE_IMG_UPLOAD_TABLEDATA, RECEIVE_TABLEDATA, RECEIVE_EDIT_ORDER_TABLEDATA, RECEIVE_DETECTION_ORDER_TABLEDATA} from './mutation_types'
 import router from '../router/permission'
 import moment from 'moment'
 import {Message, MessageBox} from 'element-ui'
 
 export default {
+  // 完成工单
   async getDataList ({commit, state}) {
     const record = (jobId, step) => {
       console.log('点击啦!!!!', jobId, step)
@@ -18,8 +19,24 @@ export default {
         console.log(res)
       })
     }
-    console.log('点击啦', state)
-    await getlistData(
+    const showCheck = (that, row) => { // 点击查看检测报告
+      console.log('aaa', that, row)
+      record(row.jobId, 1)
+      router.push({
+        path: '/article_list',
+        name: '文章列表',
+        params: {
+          operId: 1,
+          row: row,
+          pageNo: state.pageNo,
+          pageSize: state.pageSize,
+          carNumber: state.searchData.carNumber,
+          enter: true,
+          print: true
+        }
+      })
+    }
+    getlistData(
       {pageNo: state.pageNo, pageSize: state.pageSize},
       {
         type: 9,
@@ -31,23 +48,7 @@ export default {
     ).then(res => {
       console.log(res)
     }).catch(res => {
-      const showCheck = (that, row) => { // 点击查看检测报告
-        console.log('aaa', that, row)
-        record(row.jobId, 1)
-        router.push({
-          path: '/article_list',
-          name: '文章列表',
-          params: {
-            operId: 1,
-            row: row,
-            pageNo: state.pageNo,
-            pageSize: state.pageSize,
-            carNumber: state.searchData.carNumber,
-            enter: true,
-            print: true
-          }
-        })
-      }
+      console.log('完成工单列表', res)
       if (res.data.retcode === 1) {
         const tableData = res.data.data.rows // 表格数据
         // console.log(tableData)
@@ -93,8 +94,8 @@ export default {
       }
     })
   },
-
-  async getDetectionOrderList ({commit, state}) {
+  // 待编辑报告
+  async getDetectionOrderEditList ({commit, state}) {
     const showEditTest = (that, row) => { // 开始编辑
       console.log('点击啦!!!!', that, row, row.jobId)
       editDetectionOrder({jobId: row.jobId, version: row.version})
@@ -118,7 +119,7 @@ export default {
     const starEdit = (that, row) => { // 编辑检测报告
       console.log(that, row)
     }
-    await getDetectionOrderListData({pageNo: state.pageNo, pageSize: state.pageSize}, {type: 3}).then(res => {
+    await getDetectionOrderEdutListData({pageNo: state.pageNo, pageSize: state.pageSize}, {type: 3}).then(res => {
       console.log(res)
     }).catch(res => {
       console.log('待编辑报告数据', res)
@@ -132,7 +133,7 @@ export default {
         let longDatas = []
         let btnArr = []
         let minArr = []
-        let detectionOrderBtnArrList = []
+        let detectionOrderEditBtnArrList = []
         for (let i = 0; i < tableData.length; i++) {
           tableData[i].checkTypeLaber = tableData[i].checkType === 1 ? '检测' : (tableData[i].checkType === 3 ? '治疗+检测' : '治疗') // 业务类型
           tableData[i].inputTime = moment(tableData[i].inputTime).format('YYYY-MM-DD HH:MM')
@@ -161,18 +162,18 @@ export default {
             minArr = []
           }
           if (minArr.length === 0) {
-            detectionOrderBtnArrList.push({
+            detectionOrderEditBtnArrList.push({
               jobId: tableData[index / 2].jobId,
               btnList: minArr
             })
           }
           minArr.push(c) // 将当前分类保存到小数组中
         })
-        commit(RECEIVE_TABLEDATA, {tableData, pagination, longDatas, detectionOrderBtnArrList})// 提交一个mutation
+        commit(RECEIVE_EDIT_ORDER_TABLEDATA, {tableData, pagination, longDatas, detectionOrderEditBtnArrList})// 提交一个mutation
       }
     })
   },
-
+  // 待上传照片
   async getDetectionImgUploadList ({commit, state}) {
     const showEditTest = (that, row) => {
       MessageBox('此操作将提交照片, 是否继续?', '提示', {
@@ -195,9 +196,9 @@ export default {
     await getDetectionImgUploadData({pageNo: state.pageNo, pageSize: state.pageSize}, {type: 2}).then(res => {
       console.log(res)
     }).catch(res => {
+      console.log('待上传照片', res)
       if (res.data.retcode === 1) {
         const tableData = res.data.data.rows
-        console.log('待上传照片', tableData)
         const pagination = { // 分页数据
           pageSize: res.data.data.pageSize,
           pageNum: res.data.data.pageNo,
@@ -243,6 +244,36 @@ export default {
           minArr.push(c) // 将当前分类保存到小数组中
         })
         commit(RECEIVE_IMG_UPLOAD_TABLEDATA, {tableData, pagination, longDatas, detectionImgUploadBtnArrList})// 提交一个mutation
+      }
+    })
+  },
+  // 待检测工单
+  async getDetectionOrderList ({commit, state}) {
+    await getDetectionOrderListData({pageNo: state.pageNo, pageSize: state.pageSize}, {type: 1}).then(res => {
+      console.log(res)
+    }).catch(res => {
+      console.log('待检测工单', res)
+      if (res.data.retcode === 1) {
+        const tableData = res.data.data.rows
+        const pagination = { // 分页数据
+          pageSize: res.data.data.pageSize,
+          pageNum: res.data.data.pageNo,
+          total: res.data.data.total
+        }
+        let longDatas = []
+        for (let i = 0; i < tableData.length; i++) {
+          tableData[i].checkTypeLaber = tableData[i].checkType === 1 ? '检测' : (tableData[i].checkType === 3 ? '治疗+检测' : '治疗') // 业务类型
+          tableData[i].inputTime = moment(tableData[i].inputTime).format('YYYY-MM-DD HH:MM')
+          longDatas.push({ // 车辆信息
+            jobId: tableData[i].jobId,
+            note: [
+              tableData[i].factoryName,
+              tableData[i].seriesName,
+              tableData[i].modelName
+            ]
+          })
+          commit(RECEIVE_DETECTION_ORDER_TABLEDATA, {tableData, pagination, longDatas})
+        }
       }
     })
   }

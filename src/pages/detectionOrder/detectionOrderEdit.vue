@@ -1,3 +1,4 @@
+<!--待编辑报告-->
 <template>
   <div class="ces-main">
     <search-com
@@ -13,12 +14,12 @@
       :isSelection='true'
       :isIndex='true'
       :isHandle='true'
-      :tableData='tableData'
+      :tableData='editDetectionTableData'
       :tableCols='tableCols'
-      :newBtnList='detectionOrderBtnArrList'
+      :newBtnList='detectionOrderEditBtnArrList'
       :isPagination='true'
-      :tablePage='pagination'
-      :longDatas="longDatas"
+      :tablePage='editDetectionPagination'
+      :longDatas="editDetectionLongData"
     >
     </table-com>
     <record-form
@@ -89,22 +90,22 @@ export default {
     }
   },
   created () {
-    this.getDetectionOrderList()
+    this.getDetectionOrderEditList()
   },
   computed: {
-    ...mapState(['tableData', 'pagination', 'longDatas', 'pageNo', 'pageSize', 'searchData', 'redordData', 'redordCols', 'detectionOrderBtnArrList'])// 读数据
+    ...mapState(['editDetectionTableData', 'editDetectionPagination', 'editDetectionLongData', 'pageNo', 'pageSize', 'searchData', 'redordData', 'redordCols', 'detectionOrderEditBtnArrList'])// 读数据
   },
   methods: {
-    ...mapActions(['getDetectionOrderList']),
+    ...mapActions(['getDetectionOrderEditList']),
     showRecord (that, row) { // 点击操作记录
-      console.log(that, row)
+      // console.log(that, row)
       this.isShowRecord = true
       getOperatingRecord({ id: row.jobId })
         .then(res => {
           console.log(res)
         }).catch(res => {
+          console.log('操作记录', res)
           const data = res.data.data.list
-          console.log(data)
           this.$store.state.redordData = data
         })
     },

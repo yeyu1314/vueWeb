@@ -123,6 +123,96 @@ const constantRouterMap = [
           isAlive: true,
           title: '待编辑报告'
         }
+      },
+      {
+        path: '/detectionOrderAudit',
+        name: '待审核报告',
+        component: _import('detectionOrder/detectionOrderAudit'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: 'detectionOrderAudit'
+        }
+      },
+      {
+        path: '/detectionOrderTreat',
+        name: '治疗单确认',
+        component: _import('detectionOrder/detectionOrderTreat'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '治疗单确认'
+        }
+      },
+      {
+        path: '/detectionOrderReview',
+        name: '待复查工单',
+        component: _import('detectionOrder/detectionOrderReview'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '待复查工单'
+        }
+      },
+      {
+        path: '/detectionOrderReviewImg',
+        name: '复查照片上传',
+        component: _import('detectionOrder/detectionOrderReviewImg'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '复查照片上传'
+        }
+      },
+      {
+        path: '/detectionOrderReviewEdit',
+        name: '复查报告编辑',
+        component: _import('detectionOrder/detectionOrderReviewEdit'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '复查报告编辑'
+        }
+      },
+      {
+        path: '/detectionOrderReviewAudit',
+        name: '复查报告待审',
+        component: _import('detectionOrder/detectionOrderReviewAudit'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '复查报告待审'
+        }
+      },
+      {
+        path: '/detectionOrderFinsh',
+        name: '完成工单列表',
+        component: _import('detectionOrder/detectionOrderFinsh'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '完成工单列表'
+        }
+      },
+      {
+        path: '/detectionOrderFreeze',
+        name: '冻结工单列表',
+        component: _import('detectionOrder/detectionOrderFreeze'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '冻结工单列表'
+        }
+      },
+      {
+        path: '/detectionOrderAbandon',
+        name: '废弃工单列表',
+        component: _import('detectionOrder/detectionOrderAbandon'),
+        meta: {
+          auth: false,
+          isAlive: true,
+          title: '废弃工单列表'
+        }
       }
     ]
   },

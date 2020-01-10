@@ -1,3 +1,4 @@
+<!--带上传照片-->
 <template>
   <div class="ces-main">
     <search-com
@@ -9,7 +10,7 @@
     </search-com>
     <table-com
       :that='that'
-      size='small '
+      size='medium '
       :isSelection='true'
       :isIndex='true'
       :isHandle='true'
@@ -17,8 +18,8 @@
       :tableCols='tableCols'
       :newBtnList="detectionImgUploadBtnArrList"
       :isPagination='true'
-      :tablePage='pagination'
-      :longDatas="longDatas"
+      :tablePage='imgUploadPagination'
+      :longDatas="imgUploadLongDatas"
     >
     </table-com>
 
@@ -58,28 +59,6 @@ export default {
           ]
         }
       ],
-      newBtnList: [],
-
-      /*  {id:1,carNumber:'粤B555'},
-          {id:2,carNumber:'粤B555'},
-          {id:3,carNumber:'粤B555'},
-
-      {id : 1,btnList:[
-        {type:'primary',label:'上传照片',isShow:true, handle:(row,that)=>this.showEditTest(row,that)},
-        {type:'success',label:'完成',isShow:false, handle:row=>''}
-      ]
-      },
-      {id : 2,btnList:[
-        {type:'primary',label:'上传照片',isShow:true, handle:(row,that)=>this.showEditTest(row,that)},
-        {type:'success',label:'完成',isShow:false, handle:row=>''}
-      ]
-      },
-      {id : 3,btnList:[
-        {type:'primary',label:'上传照片',isShow:true, handle:(row,that)=>this.showEditTest(row,that)},
-        {type:'success',label:'完成',isShow:false, handle:row=>''}
-      ]
-      }, */
-
       orderPageShowOrgName: false
     }
   },
@@ -91,7 +70,7 @@ export default {
     searchCom
   },
   computed: {
-    ...mapState(['imgUploadTableData', 'pagination', 'longDatas', 'pageNo', 'pageSize', 'searchData', 'detectionImgUploadBtnArrList'])// 读数据
+    ...mapState(['imgUploadTableData', 'imgUploadPagination', 'imgUploadLongDatas', 'pageNo', 'pageSize', 'searchData', 'detectionImgUploadBtnArrList'])// 读数据
   },
   methods: {
     ...mapActions(['getDetectionImgUploadList'])

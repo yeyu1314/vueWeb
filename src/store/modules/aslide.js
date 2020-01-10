@@ -63,6 +63,42 @@ export default {
           {
             'text': '待编辑报告',
             'path': '/detectionOrderEdit'
+          },
+          {
+            'text': '待审核报告',
+            'path': '/detectionOrderAudit'
+          },
+          {
+            'text': '治疗单确认',
+            'path': '/detectionOrderTreat'
+          },
+          {
+            'text': '待复查工单',
+            'path': '/detectionOrderReview'
+          },
+          {
+            'text': '复查照片上传',
+            'path': '/detectionOrderReviewImg'
+          },
+          {
+            'text': '复查报告编辑',
+            'path': '/detectionOrderReviewEdit'
+          },
+          {
+            'text': '复查报告待审',
+            'path': '/detectionOrderReviewAudit'
+          },
+          {
+            'test': '完成工单列表',
+            'path': '/detectionOrderFinsh'
+          },
+          {
+            'test': '冻结工单列表',
+            'path': '/detectionOrderFreeze'
+          },
+          {
+            'test': '废弃工单列表',
+            'path': '/detectionOrderAbandon'
           }
         ]
       }

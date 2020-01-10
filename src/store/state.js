@@ -23,15 +23,38 @@ export default {
     checkType: null
   },
   checkButtonList: [],
+  detectionOrderBtnArrList: [],
   // 待编辑报告
+  editDetectionTableData: [],
+  editDetectionLongData: [],
+  editDetectionPagination: {
+    pageSize: 10,
+    pageNum: 1,
+    total: 0
+  },
   redordCols: [ // 操作记录表头
     {label: '操作人', prop: 'userName'},
     {label: '操作内容', prop: 'remarks'},
     {label: '操作时间', prop: 'inputTime'}
   ],
   redordData: [], // 操作记录数据
-  detectionOrderBtnArrList: [],
+  // 完成工单列表
+  detectionOrderEditBtnArrList: [],
   // 待上传照片
   imgUploadTableData: [],
-  detectionImgUploadBtnArrList: []
+  imgUploadLongDatas: [],
+  imgUploadPagination: {// 页数...
+    pageSize: 10,
+    pageNum: 1,
+    total: 0
+  },
+  detectionImgUploadBtnArrList: [],
+  // 待检测工单
+  detectionOrderTableData: [],
+  detectionOrderLongDatas: [],
+  detectionOrderPagination: {
+    pageSize: 10,
+    pageNum: 1,
+    total: 0
+  }
 }

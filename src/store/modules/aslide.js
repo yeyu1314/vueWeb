@@ -89,16 +89,27 @@ export default {
             'path': '/detectionOrderReviewAudit'
           },
           {
-            'test': '完成工单列表',
+            'text': '完成工单列表',
             'path': '/detectionOrderFinsh'
           },
           {
-            'test': '冻结工单列表',
+            'text': '冻结工单列表',
             'path': '/detectionOrderFreeze'
           },
           {
-            'test': '废弃工单列表',
+            'text': '废弃工单列表',
             'path': '/detectionOrderAbandon'
+          }
+        ]
+      },
+      {
+        'text': '菜单',
+        'path': 'menu',
+        'icon': 'el-icon-s-operation',
+        'itemGroup': [
+          {
+            'text': '菜单列表',
+            'path': '/menu_list'
           }
         ]
       }
